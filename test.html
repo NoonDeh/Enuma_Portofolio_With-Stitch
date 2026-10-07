@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_standard" name="shell-type"/>
+<title>Rio Ivander Saputra — Junior Software Developer</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&amp;family=Geist:wght@300;400;500;600;700;800;900&amp;family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "canvas": "#FAF7F2",
+            "surface": "#F5EFEB",
+            "surface-subtle": "#EFE9E0",
+            "surface-card": "#FFFFFF",
+            "border-warm": "#E6DDD3",
+            "border-subtle": "rgba(60, 50, 40, 0.08)",
+            "text-primary": "#201E1B",
+            "text-secondary": "#4D463F",
+            "text-muted": "#7A736A",
+            "btn-dark": "#2A2522",
+            "btn-dark-hover": "#1C1816",
+            "btn-warm": "#82634B",
+            "status-green": "#2F7C4F",
+            "status-green-bg": "#EBF4EE",
+            "chip-bg": "#EDE7DE"
+          },
+          fontFamily: {
+            serif: ["Merriweather", "Georgia", "serif"],
+            sans: ["Geist", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+            mono: ["Geist Mono", "ui-monospace", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #FAF7F2;
+        color: #201E1B;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+    }
+    ::-webkit-scrollbar { display: none; }
+
+    /* Split-Flap Modern Refined Departure Tile Styles */
+    .split-flap-container {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2.5px 3px;
+      perspective: 800px;
+      vertical-align: middle;
+    }
+    .split-flap-tile {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #1C1917;
+      color: #FAF7F2;
+      font-family: "Geist Mono", monospace;
+      font-weight: 700;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px -1px rgba(28, 25, 23, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      border: 1px solid #141210;
+      user-select: none;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+    }
+    .split-flap-tile:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 4px 8px -1px rgba(28, 25, 23, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    .split-flap-tile::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.75);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12);
+      z-index: 5;
+    }
+    .split-flap-tile .char-label {
+      line-height: 1;
+      display: inline-block;
+      letter-spacing: -0.02em;
+    }
+    .split-flap-tile.space-tile {
+      background: transparent;
+      box-shadow: none;
+      border-color: transparent;
+    }
+    .split-flap-tile.space-tile::after {
+      display: none;
+    }
+
+    /* Flip animation */
+    @keyframes flipDown {
+      0% {
+        transform: rotateX(0deg);
+      }
+      50% {
+        transform: rotateX(-90deg);
+        background-color: #0d0c0b;
+      }
+      100% {
+        transform: rotateX(0deg);
+      }
+    }
+    .flipping {
+      animation: flipDown 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-canvas font-sans text-text-primary antialiased selection:bg-border-warm selection:text-text-primary relative">
+<!-- BACKGROUND SLICED WAVES CANVAS (Subtle Editorial Linen Shader) -->
+<canvas class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-20" id="sliced-waves-canvas"></canvas>
+<div class="relative z-10">
+<!-- TOP FLOATING NAVBAR -->
+<header class="sticky top-4 z-50 w-full max-w-4xl mx-auto px-4 mb-4">
+<div class="h-14 px-5 rounded-full bg-surface-card/90 backdrop-blur-md border border-border-warm shadow-sm flex items-center justify-between">
+<a class="flex items-center gap-2.5 font-bold tracking-tight text-text-primary hover:opacity-80 transition-opacity" href="#">
+<span class="w-6 h-6 rounded-md bg-btn-dark text-canvas flex items-center justify-center font-mono text-xs font-semibold">R</span>
+<span class="font-sans text-sm font-semibold tracking-wider uppercase text-text-primary">RIO IVANDER SAPUTRA</span>
+</a>
+<nav class="flex items-center gap-1 sm:gap-2">
+<a class="px-3 py-1 rounded-full text-xs font-medium text-text-secondary hover:text-text-primary hover:bg-surface transition-colors" href="#about">About</a>
+<a class="px-3 py-1 rounded-full text-xs font-medium text-text-secondary hover:text-text-primary hover:bg-surface transition-colors" href="#skills">Skills</a>
+<a class="px-3 py-1 rounded-full text-xs font-medium text-text-secondary hover:text-text-primary hover:bg-surface transition-colors" href="#projects">Projects</a>
+<a class="px-3 py-1 rounded-full text-xs font-medium text-text-secondary hover:text-text-primary hover:bg-surface transition-colors" href="#contact">Contact</a>
+</nav>
+<div class="flex items-center gap-2">
+<a class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-warm text-xs font-medium text-text-secondary hover:bg-surface-subtle transition-colors" href="#contact">
+<span class="material-symbols-outlined text-sm">badge</span>
+<span>CV</span>
+</a>
+</div>
+</div>
+</header>
+<!-- MAIN CONTAINER -->
+<main class="max-w-4xl mx-auto px-4 pb-20 space-y-16">
+<!-- HERO SECTION -->
+<section class="pt-6 sm:pt-10 flex flex-col gap-8">
+<!-- Status Badge -->
+<div class="flex items-center gap-2 text-xs font-mono tracking-wide text-text-muted">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-status-green-bg text-status-green font-medium">
+<span class="w-2 h-2 rounded-full bg-status-green animate-pulse"></span>
+          OPEN TO PKL / INTERNSHIP
+        </span>
+<span class="text-border-warm">•</span>
+<span class="flex items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined text-xs text-text-muted">location_on</span>
+          Surakarta, ID
+        </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<!-- Left Hero Content -->
+<div class="md:col-span-7 flex flex-col gap-4">
+<!-- REACT BITS: Interactive TechText Canvas with Robust Immediate Typography -->
+<div class="relative w-full rounded-2xl bg-surface/80 border border-border-warm p-3 sm:p-4 overflow-hidden shadow-sm backdrop-blur-sm group">
+<div class="flex items-center justify-between pb-2 px-1 text-[10px] font-mono text-text-muted border-b border-border-warm/60">
+<span class="flex items-center gap-1.5">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-btn-warm animate-ping"></span>
+<span class="font-semibold text-text-secondary">ONLINE</span>
+</span>
+<span class="hidden sm:inline-flex items-center gap-1 text-[10px] text-text-muted">
+<span class="material-symbols-outlined text-xs">touch_app</span> HOVER &amp; DRAG TO INTERACT
+            </span>
+</div>
+<!-- Container with crisp title typography and layered glitch interactive canvas -->
+<div class="relative w-full h-[120px] sm:h-[135px] flex items-center justify-start overflow-hidden">
+<!-- Fallback and immediate crisp typography base -->
+<div class="tech-text-fallback select-none pointer-events-none flex flex-col justify-center leading-[1.05] tracking-tight">
+<h1 class="text-3xl sm:text-4xl md:text-[42px] font-extrabold text-text-primary tracking-tight font-sans">
+                JUNIOR SOFTWARE<br/>
+<span class="text-text-primary tracking-normal font-black">DEVELOPER</span>
+</h1>
+</div>
+<!-- Interactive WebGL/Canvas layer dynamically synced -->
+<canvas class="absolute inset-0 w-full h-full cursor-crosshair z-10" id="hero-tech-text-canvas"></canvas>
+</div>
+</div>
+<p class="text-base text-text-secondary leading-relaxed font-sans">
+            Saya adalah siswa kelas 11 jurusan <strong>Pengembangan Perangkat Lunak dan Gim (PPLG)</strong> di SMK Negeri 2 Surakarta yang berfokus mendalami software development, arsitektur kode modern, dan solusi web aplikatif.
+          </p>
+<!-- Action Buttons -->
+<div class="flex flex-wrap items-center gap-3 pt-2">
+<a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-btn-dark hover:bg-btn-dark-hover text-white text-xs font-medium tracking-wide transition-all shadow-sm" href="#projects">
+<span class="material-symbols-outlined text-sm">code</span>
+<span>View Projects</span>
+</a>
+<a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface hover:bg-surface-subtle border border-border-warm text-text-primary text-xs font-medium tracking-wide transition-all" href="#skills">
+<span class="material-symbols-outlined text-sm">layers</span>
+<span>Tech Stack</span>
+</a>
+</div>
+<!-- Top Skills Icons Micro-Row -->
+<div class="pt-3 flex flex-col gap-1.5">
+<span class="text-[10px] font-mono uppercase tracking-wider text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">terminal</span>
+              Top Competencies
+            </span>
+<div class="flex items-center gap-2 text-xs font-mono text-text-secondary">
+<span class="px-2 py-0.5 rounded bg-chip-bg border border-border-warm/60">Java</span>
+<span class="px-2 py-0.5 rounded bg-chip-bg border border-border-warm/60">JavaScript</span>
+<span class="px-2 py-0.5 rounded bg-chip-bg border border-border-warm/60">HTML5/CSS3</span>
+<span class="px-2 py-0.5 rounded bg-chip-bg border border-border-warm/60">Android Studio</span>
+</div>
+</div>
+</div>
+<!-- Right Hero Visual: Circular Portrait & Interactive Terminal Card -->
+<div class="md:col-span-5 flex flex-col items-center md:items-end gap-4 relative">
+<!-- Portrait in warm circle -->
+<div class="w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-surface shadow-md bg-surface-subtle">
+<img alt="Rio Ivander Saputra portrait" class="w-full h-full object-cover" src="/Image/Profil_cpy.jpg"/>
+</div>
+<!-- Terminal Floating Card -->
+<div class="w-full max-w-xs rounded-xl bg-surface-card border border-border-warm shadow-md p-3.5 font-mono text-xs text-text-secondary">
+<div class="flex items-center gap-1.5 pb-2.5 mb-2 border-b border-border-warm/60">
+<span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+<span class="text-[10px] text-text-muted ml-auto font-sans">terminal</span>
+</div>
+<div class="space-y-1 leading-relaxed">
+<div class="text-text-muted"><span class="text-status-green font-bold">$</span> whoami</div>
+<div class="text-text-primary pl-2">rio ivander saputra — junior software developer</div>
+<div class="text-text-muted pt-1"><span class="text-status-green font-bold">$</span> status</div>
+<div class="text-text-primary pl-2 flex items-center gap-1 text-status-green">ready for pkl 2027/2028 ✓</div>
+<div class="text-text-muted pt-1"><span class="text-status-green font-bold">$</span> stack --top</div>
+<div class="text-text-secondary pl-2 text-[11px]">Java · JS · HTML/CSS · Android</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ABOUT SECTION -->
+<section class="flex flex-col gap-6" id="about">
+<div class="flex flex-col items-start gap-2">
+<span class="px-2.5 py-0.5 rounded-full bg-btn-dark text-white text-[11px] font-mono tracking-wider uppercase font-semibold">ABOUT ME</span>
+<div class="flex flex-col sm:flex-row sm:items-center gap-3">
+<h2 class="text-2xl sm:text-3xl font-serif text-text-primary font-bold tracking-tight">
+            A Student Developer
+          </h2>
+<div class="split-flap-board inline-flex items-center" data-splitflap="SMKN 2 SURAKARTA" data-tile-size="badge"></div>
+</div>
+<p class="text-sm font-sans text-text-muted -mt-1">
+          From Surakarta, Central Java, Indonesia
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<!-- Story Copy -->
+<div class="md:col-span-7 space-y-4 text-text-secondary leading-relaxed text-sm">
+<p>
+            Saya adalah siswa kelas 11 jurusan Pengembangan Perangkat Lunak dan Gim (PPLG) di <strong>SMK Negeri 2 Surakarta</strong>. Ketertarikan saya pada dunia pemrograman berawal dari rasa ingin tahu tentang cara kerja web dan aplikasi, yang kini berkembang menjadi komitmen serius untuk menguasai software engineering.
+          </p>
+<p>
+            Selama proses pembelajaran di sekolah maupun eksperimen mandiri, saya terbiasa membangun antarmuka web semantik, mengimplementasikan logika berorientasi objek dalam Java, dan menyelesaikan alur version control menggunakan Git &amp; GitHub.
+          </p>
+<p class="text-xs text-text-muted font-mono pt-1">
+            📍 Surakarta, Jawa Tengah, Indonesia • Usia: 16 Tahun • Kelas 11 PPLG
+          </p>
+</div>
+<!-- Right Side Insight Cards with Proportional SplitFlap Badges -->
+<div class="md:col-span-5 flex flex-col gap-3">
+<div class="p-4 rounded-xl bg-surface-card border border-border-warm shadow-sm flex items-start gap-3 hover:border-text-secondary/30 transition-colors">
+<span class="material-symbols-outlined text-btn-warm text-xl mt-0.5">rocket_launch</span>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs font-mono font-bold uppercase tracking-wider text-text-primary">Prinsip Eksekusi</span>
+<div class="split-flap-board" data-splitflap="SHIPPED BEATS PERFECT" data-tile-size="badge"></div>
+</div>
+<p class="text-xs text-text-muted mt-1 leading-normal">
+                Kode yang berjalan nyata dan bermanfaat jauh lebih bernilai dibanding draft yang tidak pernah selesai.
+              </p>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-card border border-border-warm shadow-sm flex items-start gap-3 hover:border-text-secondary/30 transition-colors">
+<span class="material-symbols-outlined text-btn-warm text-xl mt-0.5">psychology</span>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs font-mono font-bold uppercase tracking-wider text-text-primary">Problem Solving</span>
+<div class="split-flap-board" data-splitflap="PAHAM MASALAH DAHULU" data-tile-size="badge"></div>
+</div>
+<p class="text-xs text-text-muted mt-1 leading-normal">
+                Membaca dan memetakan alur problem secara tuntas sebelum menulis baris kode pertama.
+              </p>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-card border border-border-warm shadow-sm flex items-start gap-3 hover:border-text-secondary/30 transition-colors">
+<span class="material-symbols-outlined text-btn-warm text-xl mt-0.5">school</span>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs font-mono font-bold uppercase tracking-wider text-text-primary">Mindset Belajar</span>
+<div class="split-flap-board" data-splitflap="CONTINUOUS LEARNING" data-tile-size="badge"></div>
+</div>
+<p class="text-xs text-text-muted mt-1 leading-normal">
+                Selalu siap belajar dari rekan yang lebih berpengalaman dan giat mengeksplorasi teknologi baru.
+              </p>
+</div>
+</div>
+</div>
+</div>
+<!-- EDUCATION / VOKASI TIMELINE -->
+<div class="mt-4 pt-6 border-t border-border-warm/60">
+<h3 class="text-xs font-mono uppercase tracking-wider text-text-muted mb-4">EDUCATION &amp; PATHWAY</h3>
+<div class="p-4 rounded-xl bg-surface-card border border-border-warm shadow-sm flex items-start justify-between gap-4">
+<div class="flex items-start gap-3.5">
+<div class="w-10 h-10 rounded-lg bg-surface border border-border-warm flex items-center justify-center text-btn-warm flex-shrink-0">
+<span class="material-symbols-outlined text-xl">account_balance</span>
+</div>
+<div>
+<div class="flex flex-wrap items-center gap-2">
+<span class="text-xs font-mono px-2 py-0.5 rounded bg-chip-bg text-text-secondary border border-border-warm/60">2025 - now</span>
+<span class="text-xs font-mono px-2 py-0.5 rounded bg-status-green-bg text-status-green border border-status-green/20">Active Student</span>
+</div>
+<h4 class="font-bold text-sm text-text-primary mt-1">Pengembangan Perangkat Lunak dan Gim (PPLG)</h4>
+<p class="text-xs text-text-muted">SMK Negeri 2 Surakarta • Surakarta, Jawa Tengah</p>
+<p class="text-xs text-text-secondary mt-1.5 leading-relaxed">
+                Fokus kurikulum: Pemrograman Berorientasi Objek (Java), Web Development (HTML/CSS/JS), Mobile Dasar (Android Studio), Pemodelan Perangkat Lunak, dan Etika Kerja Vokasi.
+              </p>
+</div>
+</div>
+</div>
+</div>
+<!-- INTEREST CHIPS -->
+<div class="flex flex-wrap items-center gap-2 pt-1">
+<span class="text-xs font-mono text-text-muted mr-1">INTERESTS:</span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-card border border-border-warm text-xs text-text-secondary">
+<span class="material-symbols-outlined text-xs text-btn-warm">code</span> Coding &amp; Logic
+        </span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-card border border-border-warm text-xs text-text-secondary">
+<span class="material-symbols-outlined text-xs text-btn-warm">palette</span> Seni &amp; Menggambar
+        </span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-card border border-border-warm text-xs text-text-secondary">
+<span class="material-symbols-outlined text-xs text-btn-warm">sports_esports</span> Video Games
+        </span>
+</div>
+</section>
+<!-- TECH STACK SECTION (Editorial Headline + Departure Board Badge) -->
+<section class="flex flex-col gap-6" id="skills">
+<div class="flex flex-col items-start gap-1">
+<span class="text-xs font-mono uppercase tracking-widest text-text-muted">COMPETENCIES</span>
+<div class="flex flex-wrap items-center gap-3">
+<h2 class="text-2xl sm:text-3xl font-serif text-text-primary font-bold tracking-tight">Tech Stack &amp; Tools</h2>
+<div class="split-flap-board" data-splitflap="STACK::VOKASI" data-tile-size="badge"></div>
+</div>
+<p class="text-xs sm:text-sm text-text-muted max-w-xl mt-1">
+          Teknologi dan tools yang dipelajari dan diimplementasikan secara aktif dalam kurikulum PPLG maupun praktikum mandiri.
+        </p>
+</div>
+<!-- Languages -->
+<div class="space-y-2">
+<h3 class="text-xs font-mono uppercase tracking-wider text-text-muted">Languages</h3>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+<!-- Java -->
+<div class="p-3 rounded-xl bg-surface-card border border-border-warm hover:border-text-secondary/40 transition-colors flex flex-col items-center justify-center text-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-2xl text-btn-warm">coffee</span>
+<span class="text-xs font-semibold text-text-primary">Java</span>
+<span class="text-[10px] font-mono text-text-muted">12+ Bulan • OOP</span>
+</div>
+<!-- JavaScript -->
+<div class="p-3 rounded-xl bg-surface-card border border-border-warm hover:border-text-secondary/40 transition-colors flex flex-col items-center justify-center text-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-2xl text-amber-600">javascript</span>
+<span class="text-xs font-semibold text-text-primary">JavaScript</span>
+<span class="text-[10px] font-mono text-text-muted">DOM</span>
+</div>
+<!-- Python -->
+<div class="p-3 rounded-xl bg-surface-card border border-border-warm hover:border-text-secondary/40 transition-colors flex flex-col items-center justify-center text-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-2xl text-blue-600">terminal</span>
+<span class="text-xs font-semibold text-text-primary">Python</span>
+<span class="text-[10px] font-mono text-text-muted">5+ Bulan • Math Logic</span>
+</div>
+<!-- HTML5 -->
+<div class="p-3 rounded-xl bg-surface-card border border-border-warm hover:border-text-secondary/40 transition-colors flex flex-col items-center justify-center text-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-2xl text-orange-600">html</span>
+<span class="text-xs font-semibold text-text-primary">HTML5</span>
+<span class="text-[10px] font-mono text-text-muted">Semantic Web</span>
+</div>
+</div>
+</div>
+<!-- Frontend & Styling -->
+<div class="space-y-2">
+<h3 class="text-xs font-mono uppercase tracking-wider text-text-muted">Frontend &amp; Styling</h3>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+<!-- CSS3 -->
+<div class="p-3 rounded-xl bg-surface-card border border-border-warm hover:border-text-secondary/40 transition-colors flex flex-col items-center justify-center text-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-2xl text-sky-600">css</span>
+<span class="text-xs font-semibold text-text-primary">CSS3</span>
+<span class="text-[10px] font-mono text-text-muted">Flexbox &amp; Grid</span>
+</div>
+<!-- Responsive Design -->
+<div class="p-3 rounded-xl bg-surface-card border border-border-warm hover:border-text-secondary/40 transition-colors flex flex-col items-center justify-center text-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-2xl text-teal-600">devices</span>
+<span class="text-xs font-semibold text-text-primary">Responsive Design</span>
+<span class="text-[10px] font-mono text-text-muted">Mobile-first layouts</span>
+</div>
+<!-- DOM & Web APIs -->
+</div>
+</div>
+<!-- Mobile & Tools -->
+<div class="space-y-2">
+<h3 class="text-xs font-mono uppercase tracking-wider text-text-muted">Mobile, Version Control &amp; Tools</h3>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+<!-- Android Studio -->
+<div class="p-3 rounded-xl bg-surface-card border border-border-warm hover:border-text-secondary/40 transition-colors flex flex-col items-center justify-center text-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-2xl text-emerald-600">android</span>
+<span class="text-xs font-semibold text-text-primary">Android Studio</span>
+<span class="text-[10px] font-mono text-text-muted">Mobile Layouts &amp; Java</span>
+</div>
+<!-- Git -->
+<div class="p-3 rounded-xl bg-surface-card border border-border-warm hover:border-text-secondary/40 transition-colors flex flex-col items-center justify-center text-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-2xl text-orange-700">fork_right</span>
+<span class="text-xs font-semibold text-text-primary">Git</span>
+<span class="text-[10px] font-mono text-text-muted">Branch, Commit, Merge</span>
+</div>
+<!-- GitHub -->
+<div class="p-3 rounded-xl bg-surface-card border border-border-warm hover:border-text-secondary/40 transition-colors flex flex-col items-center justify-center text-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-2xl text-text-primary">hub</span>
+<span class="text-xs font-semibold text-text-primary">GitHub</span>
+<span class="text-[10px] font-mono text-text-muted">Collaboration &amp; PR</span>
+</div>
+<!-- VS Code / IDE -->
+<div class="p-3 rounded-xl bg-surface-card border border-border-warm hover:border-text-secondary/40 transition-colors flex flex-col items-center justify-center text-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-2xl text-blue-500">code_blocks</span>
+<span class="text-xs font-semibold text-text-primary">VS Code</span>
+<span class="text-[10px] font-mono text-text-muted">Dev Environment</span>
+</div>
+</div>
+</div>
+</section>
+<!-- FEATURED PROJECTS SECTION -->
+<section class="flex flex-col gap-6" id="projects">
+<div class="flex flex-col items-start gap-1">
+<span class="text-xs font-mono uppercase tracking-widest text-text-muted">SHOWCASE &amp; CASE STUDIES</span>
+<div class="flex flex-wrap items-center gap-3">
+<h2 class="text-2xl sm:text-3xl font-serif text-text-primary font-bold tracking-tight">Featured Projects</h2>
+<div class="split-flap-board" data-splitflap="CODE SHOWCASE" data-tile-size="badge"></div>
+</div>
+<p class="text-xs sm:text-sm text-text-muted max-w-xl mt-1">
+          Koleksi proyek praktikum kejuruan di SMKN 2 Surakarta dan karya eksplorasi mandiri.
+        </p>
+</div>
+<div id="card-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl w-full"></div>
+<!-- Project 1: School Portal System -->
+<!-- Project 2: Developer Portfolio v1 -->
+<!-- Project 3: Task Tracker & Java Core -->
+<!-- PKL READINESS BANNER -->
+<section class="p-6 rounded-2xl bg-surface-card border border-border-warm shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-start gap-3.5 max-w-xl">
+<div class="w-10 h-10 rounded-xl bg-status-green-bg border border-status-green/30 flex items-center justify-center text-status-green flex-shrink-0">
+<span class="material-symbols-outlined text-xl">verified</span>
+</div>
+<div>
+<h3 class="text-sm font-bold text-text-primary">Komitmen Disiplin Vokasi &amp; Prakerin</h3>
+<p class="text-xs text-text-secondary mt-0.5 leading-relaxed">
+            Sebagai siswa SMK Negeri 2 Surakarta, saya siap mematuhi standar kerja industri, manajemen waktu tepat waktu, etika profesional, dan kemampuan adaptasi tinggi terhadap workflow tim engineering.
+          </p>
+</div>
+</div>
+<div class="flex-shrink-0">
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-chip-bg border border-border-warm text-xs font-mono text-text-primary font-medium">
+          Period: 2027 / 2028 Ready
+        </span>
+</div>
+</section>
+<!-- CONTACT SECTION -->
+<section class="flex flex-col gap-6" id="contact">
+<div class="flex flex-col items-start gap-1">
+<span class="text-xs font-mono uppercase tracking-widest text-text-muted">GET IN TOUCH</span>
+<div class="flex flex-wrap items-center gap-3">
+<h2 class="text-2xl sm:text-3xl font-serif text-text-primary font-bold tracking-tight">Hubungi Rio Ivander Saputra</h2>
+<div class="split-flap-board" data-splitflap="OPEN TO WORK" data-tile-size="badge"></div>
+</div>
+<p class="text-xs sm:text-sm text-text-muted max-w-xl mt-1">
+          Terbuka untuk tawaran Praktik Kerja Lapangan (PKL), magang industri, mentoring software development, maupun diskusi kolaborasi proyek web.
+        </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<!-- Discord Card -->
+<div class="p-4 rounded-xl bg-surface-card border border-border-warm shadow-sm hover:border-text-secondary/40 transition-all flex flex-col justify-between gap-4">
+<div class="flex items-start justify-between">
+<div class="w-9 h-9 rounded-lg bg-surface border border-border-warm flex items-center justify-center text-text-primary">
+<span class="material-symbols-outlined text-xl">forum</span>
+</div>
+<span class="text-[10px] font-mono text-text-muted uppercase">Community</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-text-primary">Discord</h4>
+<p class="text-xs text-text-muted mt-0.5">Diskusi teknis &amp; chat langsung</p>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-border-warm/60">
+<span class="font-mono text-xs font-semibold text-text-primary">NoonD26#1748</span>
+<button class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-surface hover:bg-surface-subtle border border-border-warm text-text-secondary transition-colors flex items-center gap-1" onclick="navigator.clipboard.writeText('NoonD26#1748'); const t = this.querySelector('.lbl'); t.innerText='Copied!'; setTimeout(()=&gt;t.innerText='Copy', 2000);">
+<span class="material-symbols-outlined text-[13px]">content_copy</span>
+<span class="lbl">Copy</span>
+</button>
+</div>
+</div>
+<!-- Telegram Card -->
+<div class="p-4 rounded-xl bg-surface-card border border-border-warm shadow-sm hover:border-text-secondary/40 transition-all flex flex-col justify-between gap-4">
+<div class="flex items-start justify-between">
+<div class="w-9 h-9 rounded-lg bg-surface border border-border-warm flex items-center justify-center text-sky-600">
+<span class="material-symbols-outlined text-xl">send</span>
+</div>
+<span class="text-[10px] font-mono text-text-muted uppercase">Direct Chat</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-text-primary">Telegram</h4>
+<p class="text-xs text-text-muted mt-0.5">Respon cepat koordinasi</p>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-border-warm/60">
+<span class="font-mono text-xs font-semibold text-text-primary">@NoonDeh</span>
+<a class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-btn-dark hover:bg-btn-dark-hover text-white transition-colors flex items-center gap-1" href="https://t.me/NoonDeh">
+<span>Chat</span>
+<span class="material-symbols-outlined text-[13px]">arrow_outward</span>
+</a>
+</div>
+</div>
+<!-- Gmail Card -->
+<div class="p-4 rounded-xl bg-surface-card border border-border-warm shadow-sm hover:border-text-secondary/40 transition-all flex flex-col justify-between gap-4">
+<div class="flex items-start justify-between">
+<div class="w-9 h-9 rounded-lg bg-surface border border-border-warm flex items-center justify-center text-red-600">
+<span class="material-symbols-outlined text-xl">mail</span>
+</div>
+<span class="text-[10px] font-mono text-text-muted uppercase">Formal Inquiries</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-text-primary">Gmail</h4>
+<p class="text-xs text-text-muted mt-0.5">Surat resmi tawaran PKL &amp; CV</p>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-border-warm/60">
+<span class="font-mono text-xs font-semibold text-text-primary truncate max-w-[120px]" title="rioivander.dev@gmail.com">rio.ivander44@smk.belajar.id</span>
+<a class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-surface hover:bg-surface-subtle border border-border-warm text-text-secondary transition-colors flex items-center gap-1" href="mailto:rio.ivander44@smk.belajar.id">
+<span>Email</span>
+<span class="material-symbols-outlined text-[13px]">send</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- MINIMAL EDITORIAL FOOTER -->
+<footer class="w-full border-t border-border-warm/80 bg-surface/40 py-10 backdrop-blur-sm">
+<div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-green"></span>
+<span class="text-xs font-mono uppercase tracking-wider text-text-muted">OPEN TO WORK / PKL 2027/2028</span>
+</div>
+<h4 class="font-bold text-sm text-text-primary">Rio Ivander Saputra</h4>
+<p class="text-xs text-text-muted">SMKN 2 Surakarta • Junior Software Developer</p>
+</div>
+<div class="flex flex-col sm:items-end gap-2">
+<nav class="flex items-center gap-4 text-xs text-text-secondary">
+<a class="hover:text-text-primary transition-colors" href="#about">About</a>
+<a class="hover:text-text-primary transition-colors" href="#skills">Skills</a>
+<a class="hover:text-text-primary transition-colors" href="#projects">Projects</a>
+<a class="hover:text-text-primary transition-colors" href="#contact">Contact</a>
+</nav>
+<p class="text-[11px] font-mono text-text-muted">
+          © 2026 Rio Ivander Saputra • Built in Surakarta, Indonesia
+        </p>
+</div>
+</div>
+</footer>
+</div>
+<!-- ============================================================== -->
+<!-- INTERACTIVE SCRIPTS                                            -->
+<!-- 1. SlicedWaves (Warm Linen Subtle Shader Background)           -->
+<!-- 2. TechText (Crisp Immediate Typography + Interactive Glitch)  -->
+<!-- 3. SplitFlap (Departure Board Badges)                          -->
+<!-- ============================================================== -->
+<script>
+  /* ------------------------------------------------------------- */
+  /* 1. SLICED WAVES (WebGL Canvas Shader Background - Subtle Warm) */
+  /* ------------------------------------------------------------- */
+  (function initSlicedWaves() {
+    const canvas = document.getElementById('sliced-waves-canvas');
+    if (!canvas) return;
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) return;
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const vsSource = `
+      attribute vec2 position;
+      varying vec2 vUv;
+      void main() {
+        vUv = (position + 1.0) * 0.5;
+        gl_Position = vec4(position, 0.0, 1.0);
+      }
+    `;
+
+    // Editorial warm beige subtle shader
+    const fsSource = `
+      precision mediump float;
+      uniform float uTime;
+      uniform vec2 uResolution;
+      uniform vec2 uMouse;
+      varying vec2 vUv;
+
+      float hash(vec2 p) {
+        return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+      }
+
+      void main() {
+        vec2 st = gl_FragCoord.xy / uResolution;
+        float aspect = uResolution.x / uResolution.y;
+        vec2 m = uMouse / uResolution;
+
+        float distToMouse = length((st - m) * vec2(aspect, 1.0));
+        float mouseWave = sin(distToMouse * 12.0 - uTime * 2.0) * exp(-distToMouse * 2.5) * 0.08;
+
+        float slats = 36.0;
+        float slatIndex = floor(st.x * slats);
+        float slatPhase = slatIndex * 0.18;
+
+        float wave = sin(st.y * 3.0 + uTime * 0.7 + slatPhase) * 0.12
+                   + cos(st.x * 2.2 - uTime * 0.5 + slatPhase * 0.4) * 0.08
+                   + mouseWave;
+
+        float slatLine = fract(st.x * slats);
+        float border = smoothstep(0.0, 0.06, slatLine) * smoothstep(1.0, 0.94, slatLine);
+
+        // Linen & Warm Palette: #E8DFD8, #D8CDC3, #15616D subtle accent
+        vec3 bgWarm = vec3(0.98, 0.968, 0.949); // #FAF7F2
+        vec3 slat1  = vec3(0.91, 0.874, 0.847); // #E8DFD8
+        vec3 slat2  = vec3(0.847, 0.803, 0.765); // #D8CDC3
+        vec3 accentTeal = vec3(0.082, 0.38, 0.427); // #15616D
+
+        float mixVal = clamp(0.5 + wave * 2.0, 0.0, 1.0);
+        vec3 col = mix(slat1, slat2, mixVal);
+        col = mix(col, accentTeal, clamp((1.0 - distToMouse) * 0.08, 0.0, 0.08));
+        col *= (0.95 + 0.05 * border);
+
+        float grain = (hash(st + fract(uTime)) - 0.5) * 0.015;
+        col += grain;
+
+        vec3 finalColor = mix(bgWarm, col, 0.35);
+        gl_FragColor = vec4(finalColor, 0.35);
+      }
+    `;
+
+    function createShader(type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      return s;
+    }
+
+    const program = gl.createProgram();
+    gl.attachShader(program, createShader(gl.VERTEX_SHADER, vsSource));
+    gl.attachShader(program, createShader(gl.FRAGMENT_SHADER, fsSource));
+    gl.linkProgram(program);
+    gl.useProgram(program);
+
+    const posBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      -1, -1,
+       1, -1,
+      -1,  1,
+      -1,  1,
+       1, -1,
+       1,  1
+    ]), gl.STATIC_DRAW);
+
+    const posLoc = gl.getAttribLocation(program, 'position');
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+    const uTimeLoc = gl.getUniformLocation(program, 'uTime');
+    const uResLoc = gl.getUniformLocation(program, 'uResolution');
+    const uMouseLoc = gl.getUniformLocation(program, 'uMouse');
+
+    let mouse = { x: window.innerWidth * 0.5, y: window.innerHeight * 0.5 };
+    window.addEventListener('pointermove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = window.innerHeight - e.clientY;
+    });
+
+    let startTime = performance.now();
+    function render() {
+      const now = (performance.now() - startTime) * 0.001;
+      gl.uniform1f(uTimeLoc, now);
+      gl.uniform2f(uResLoc, canvas.width, canvas.height);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      gl.uniform2f(uMouseLoc, mouse.x * dpr, mouse.y * dpr);
+
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+  })();
+
+  /* ------------------------------------------------------------- */
+  /* 2. TECHTEXT CANVAS (Ultra-Crisp Title & Interactive Glyphs)   */
+  /* ------------------------------------------------------------- */
+  (function initTechText() {
+    const canvas = document.getElementById('hero-tech-text-canvas');
+    const fallback = document.querySelector('.tech-text-fallback');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = 0, height = 0;
+    const lines = ["JUNIOR SOFTWARE", "DEVELOPER"];
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@_<>/{}-+*=";
+
+    let particles = [];
+    let mouse = { x: -9999, y: -9999, isDown: false, radius: 85 };
+    let frame = 0;
+    let glyphs = [];
+
+    function setupGlyphs() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+
+      glyphs = [];
+      particles = [];
+
+      // Calculate crisp typography sizing
+      const isMobile = width < 520;
+      const fontSize = isMobile ? Math.floor(width / 13.5) : Math.min(42, Math.floor(width / 14));
+      const lineHeight = fontSize * 1.16;
+      const totalBlockHeight = lines.length * lineHeight;
+      const startY = (height - totalBlockHeight) / 2 + fontSize * 0.88;
+
+      ctx.font = `800 ${fontSize}px "Geist", -apple-system, sans-serif`;
+
+      lines.forEach((lineText, lineIdx) => {
+        const measured = ctx.measureText(lineText);
+        // Align left with slight neat padding matching container
+        let currX = 4;
+        const baselineY = startY + lineIdx * lineHeight;
+
+        for (let i = 0; i < lineText.length; i++) {
+          const char = lineText[i];
+          const cWidth = ctx.measureText(char).width;
+
+          glyphs.push({
+            char: char,
+            targetChar: char,
+            x: currX,
+            y: baselineY,
+            width: cWidth,
+            height: fontSize,
+            origX: currX,
+            origY: baselineY,
+            vx: 0,
+            vy: 0,
+            glitchTimer: 0,
+            hoverEnergy: 0,
+            scrambleChar: char
+          });
+
+          // Scatter speckle points for mechanical detail
+          if (char !== ' ') {
+            for (let p = 0; p < 1; p++) {
+              particles.push({
+                x: currX + Math.random() * cWidth,
+                y: baselineY - fontSize * 0.7 + Math.random() * fontSize,
+                origX: currX + Math.random() * cWidth,
+                origY: baselineY - fontSize * 0.7 + Math.random() * fontSize,
+                size: 1.5,
+                alpha: Math.random() * 0.5 + 0.2
+              });
+            }
+          }
+
+          currX += cWidth;
+        }
+      });
+
+      // Canvas is active, hide fallback text seamlessly
+      if (fallback) fallback.style.opacity = '0';
+    }
+
+    window.addEventListener('resize', setupGlyphs);
+    // Double trigger to ensure proper DOM element measurements
+    setupGlyphs();
+    setTimeout(setupGlyphs, 60);
+
+    const updateMousePos = (clientX, clientY) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = clientX - rect.left;
+      mouse.y = clientY - rect.top;
+    };
+
+    canvas.addEventListener('mousemove', (e) => updateMousePos(e.clientX, e.clientY));
+    canvas.addEventListener('mousedown', () => { mouse.isDown = true; });
+    window.addEventListener('mouseup', () => { mouse.isDown = false; });
+    canvas.addEventListener('mouseleave', () => {
+      mouse.x = -9999;
+      mouse.y = -9999;
+      mouse.isDown = false;
+    });
+
+    canvas.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        updateMousePos(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+    canvas.addEventListener('touchend', () => {
+      mouse.x = -9999;
+      mouse.y = -9999;
+    });
+
+    function drawTechText() {
+      frame++;
+      ctx.clearRect(0, 0, width, height);
+
+      // Subtle guideline grid
+      ctx.save();
+      ctx.strokeStyle = "rgba(60, 50, 40, 0.04)";
+      ctx.lineWidth = 1;
+      const step = 24;
+      for (let x = 0; x < width; x += step) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // Render speckle particles
+      particles.forEach((p) => {
+        const dx = p.x - mouse.x;
+        const dy = p.y - mouse.y;
+        const d = Math.hypot(dx, dy);
+        if (d < mouse.radius) {
+          const force = (1 - d / mouse.radius) * 4;
+          p.x += (dx / (d || 1)) * force;
+          p.y += (dy / (d || 1)) * force;
+        }
+        p.x += (p.origX - p.x) * 0.1;
+        p.y += (p.origY - p.y) * 0.1;
+
+        ctx.fillStyle = `rgba(130, 99, 75, ${p.alpha * 0.4})`;
+        ctx.fillRect(p.x, p.y, p.size, p.size);
+      });
+
+      const isMobile = width < 520;
+      const fontSize = isMobile ? Math.floor(width / 13.5) : Math.min(42, Math.floor(width / 14));
+      ctx.font = `800 ${fontSize}px "Geist", -apple-system, sans-serif`;
+
+      // Render tech typography glyphs
+      glyphs.forEach((g, idx) => {
+        if (g.char === ' ') return;
+
+        const centerX = g.x + g.width / 2;
+        const centerY = g.y - g.height * 0.4;
+        const distToMouse = Math.hypot(centerX - mouse.x, centerY - mouse.y);
+        const isNear = distToMouse < mouse.radius;
+
+        if (isNear) {
+          g.hoverEnergy = Math.min(1, g.hoverEnergy + 0.18);
+          const push = (1 - distToMouse / mouse.radius) * (mouse.isDown ? 12 : 6);
+          g.vx += ((centerX - mouse.x) / (distToMouse || 1)) * push * 0.15;
+          g.vy += ((centerY - mouse.y) / (distToMouse || 1)) * push * 0.15;
+
+          if (Math.random() < 0.2) {
+            g.scrambleChar = chars[Math.floor(Math.random() * chars.length)];
+            g.glitchTimer = 6;
+          }
+        } else {
+          g.hoverEnergy = Math.max(0, g.hoverEnergy - 0.04);
+        }
+
+        if (g.glitchTimer > 0) {
+          g.glitchTimer--;
+        } else {
+          g.scrambleChar = g.targetChar;
+        }
+
+        // Return springs
+        g.vx += (g.origX - g.x) * 0.16;
+        g.vy += (g.origY - g.y) * 0.16;
+        g.vx *= 0.7;
+        g.vy *= 0.7;
+        g.x += g.vx;
+        g.y += g.vy;
+
+        // Interactive dashed reticle & corners for active letter
+        if (g.hoverEnergy > 0.05) {
+          ctx.save();
+          ctx.strokeStyle = `rgba(130, 99, 75, ${g.hoverEnergy * 0.7})`;
+          ctx.lineWidth = 1;
+          ctx.setLineDash([2, 2]);
+          const pad = 2;
+          ctx.strokeRect(
+            g.x - pad,
+            g.y - g.height * 0.82 - pad,
+            g.width + pad * 2,
+            g.height + pad * 2
+          );
+
+          ctx.setLineDash([]);
+          ctx.fillStyle = "#82634B";
+          ctx.fillRect(g.x - pad - 1, g.y - g.height * 0.82 - pad - 1, 3, 3);
+          ctx.fillRect(g.x + g.width + pad - 2, g.y + g.height * 0.18 + pad - 2, 3, 3);
+          ctx.restore();
+        }
+
+        // Solid, razor-sharp deep charcoal #201E1B typography
+        ctx.fillStyle = g.hoverEnergy > 0.35 ? "#82634B" : "#201E1B";
+        ctx.fillText(g.scrambleChar, g.x, g.y);
+
+        // Technical sub-hex badge
+        if (g.hoverEnergy > 0.35) {
+          ctx.save();
+          ctx.font = `7px "Geist Mono", monospace`;
+          ctx.fillStyle = "rgba(42, 37, 34, 0.7)";
+          ctx.fillText(`0x${idx.toString(16).toUpperCase()}`, g.x, g.y + 10);
+          ctx.restore();
+        }
+      });
+
+      // Cursor follower ring
+      if (mouse.x > 0 && mouse.x < width && mouse.y > 0 && mouse.y < height) {
+        ctx.save();
+        ctx.strokeStyle = mouse.isDown ? "#82634B" : "rgba(32, 30, 27, 0.35)";
+        ctx.lineWidth = 1;
+        ctx.setLineDash([3, 3]);
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, mouse.isDown ? 16 : 10, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.fillStyle = "#82634B";
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      requestAnimationFrame(drawTechText);
+    }
+    requestAnimationFrame(drawTechText);
+  })();
+
+  /* ------------------------------------------------------------- */
+  /* 3. SPLIT FLAP BOARD (Natural & Proportional Departure Badges)  */
+  /* ------------------------------------------------------------- */
+  (function initSplitFlap() {
+    const boards = document.querySelectorAll('.split-flap-board');
+    if (!boards.length) return;
+
+    const alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-./_:";
+
+    boards.forEach((board) => {
+      const rawText = (board.getAttribute('data-splitflap') || '').toUpperCase();
+      const sizeMode = board.getAttribute('data-tile-size') || 'badge';
+
+      let sizeClasses = "w-[17px] h-[23px] text-[11px]"; // default compact badge
+      if (sizeMode === 'sm') {
+        sizeClasses = "w-5 h-7 text-xs";
+      } else if (sizeMode === 'md') {
+        sizeClasses = "w-6 h-8 text-sm";
+      }
+
+      const container = document.createElement('div');
+      container.className = "split-flap-container";
+
+      const tileInstances = [];
+
+      for (let i = 0; i < rawText.length; i++) {
+        const char = rawText[i];
+        const tile = document.createElement('div');
+
+        if (char === ' ') {
+          tile.className = `split-flap-tile space-tile w-2 h-4`;
+          tile.innerHTML = `<span class="opacity-0">&nbsp;</span>`;
+          container.appendChild(tile);
+          continue;
+        }
+
+        tile.className = `split-flap-tile ${sizeClasses}`;
+        tile.innerHTML = `<span class="char-label">${char}</span>`;
+        container.appendChild(tile);
+
+        tileInstances.push({
+          element: tile,
+          label: tile.querySelector('.char-label'),
+          targetChar: char,
+          index: i
+        });
+      }
+
+      board.appendChild(container);
+
+      function triggerBoardFlap(staggerDelay = 30) {
+        tileInstances.forEach((t, idx) => {
+          setTimeout(() => {
+            let flips = 2 + Math.floor(Math.random() * 3);
+            let currentStep = 0;
+            t.element.classList.add('flipping');
+
+            const interval = setInterval(() => {
+              currentStep++;
+              if (currentStep >= flips) {
+                t.label.innerText = t.targetChar;
+                clearInterval(interval);
+                setTimeout(() => t.element.classList.remove('flipping'), 150);
+              } else {
+                const randomChar = alphabet[Math.floor(Math.random() * alphabet.length)];
+                t.label.innerText = randomChar;
+              }
+            }, 55);
+          }, idx * staggerDelay);
+        });
+      }
+
+      board.addEventListener('mouseenter', () => triggerBoardFlap(25));
+      board.addEventListener('click', () => triggerBoardFlap(20));
+
+      // Gentle periodic mechanical tick on occasional random tiles
+      setInterval(() => {
+        if (tileInstances.length > 0 && Math.random() < 0.25) {
+          const randTile = tileInstances[Math.floor(Math.random() * tileInstances.length)];
+          randTile.element.classList.add('flipping');
+          randTile.label.innerText = alphabet[Math.floor(Math.random() * alphabet.length)];
+          setTimeout(() => {
+            randTile.label.innerText = randTile.targetChar;
+            randTile.element.classList.remove('flipping');
+          }, 200);
+        }
+      }, 5000);
+    });
+  })();
+/* ------------------------------------------------------------- */
+/* 4. SPLIT FLAP BOARD (Natural & Proportional Departure Badges)  */
+/* ------------------------------------------------------------- */
+  // --- Helper Functions (Sama seperti sebelumnya) ---
+    function parseHSL(hslStr) {
+      const match = hslStr.match(/([\d.]+)\s*([\d.]+)%?\s*([\d.]+)%?/);
+      if (!match) return { h: 40, s: 80, l: 80 };
+      return { h: parseFloat(match[1]), s: parseFloat(match[2]), l: parseFloat(match[3]) };
+    }
+
+    function buildBoxShadow(glowColor, intensity) {
+      const { h, s, l } = parseHSL(glowColor);
+      const base = `${h}deg ${s}% ${l}%`;
+      const layers = [
+        [0, 0, 0, 1, 100, true], [0, 0, 1, 0, 60, true], [0, 0, 3, 0, 50, true],
+        [0, 0, 6, 0, 40, true], [0, 0, 15, 0, 30, true], [0, 0, 25, 2, 20, true],
+        [0, 0, 50, 2, 10, true],
+        [0, 0, 1, 0, 60, false], [0, 0, 3, 0, 50, false], [0, 0, 6, 0, 40, false],
+        [0, 0, 15, 0, 30, false], [0, 0, 25, 2, 20, false], [0, 0, 50, 2, 10, false],
+      ];
+      return layers.map(([x, y, blur, spread, alpha, inset]) => {
+        const a = Math.min(alpha * intensity, 100);
+        return `${inset ? 'inset ' : ''}${x}px ${y}px ${blur}px ${spread}px hsl(${base} / ${a}%)`;
+      }).join(', ');
+    }
+
+    function easeOutCubic(x) { return 1 - Math.pow(1 - x, 3); }
+    function easeInCubic(x) { return x * x * x; }
+
+    function animateValue({ start = 0, end = 100, duration = 1000, delay = 0, ease = easeOutCubic, onUpdate, onEnd }) {
+      const t0 = performance.now() + delay;
+      function tick() {
+        const elapsed = performance.now() - t0;
+        const t = Math.min(elapsed / duration, 1);
+        onUpdate(start + (end - start) * ease(t));
+        if (t < 1) requestAnimationFrame(tick);
+        else if (onEnd) onEnd();
+      }
+      setTimeout(() => requestAnimationFrame(tick), delay);
+    }
+
+    const GRADIENT_POSITIONS = ['80% 55%', '69% 34%', '8% 6%', '41% 38%', '86% 85%', '82% 18%', '51% 4%'];
+    const COLOR_MAP = [0, 1, 2, 0, 1, 2, 1];
+
+    function buildMeshGradients(colors) {
+      const gradients = [];
+      for (let i = 0; i < 7; i++) {
+        const c = colors[Math.min(COLOR_MAP[i], colors.length - 1)];
+        gradients.push(`radial-gradient(at ${GRADIENT_POSITIONS[i]}, ${c} 0px, transparent 50%)`);
+      }
+      gradients.push(`linear-gradient(${colors[0]} 0 100%)`);
+      return gradients;
+    }
+
+    function isLightColor(color) {
+      const value = color.trim().replace('#', '');
+      if (!/^[\da-f]{3}([\da-f]{3})?$/i.test(value)) return false;
+      const hex = value.length === 3 ? value.split('').map(char => char + char).join('') : value;
+      const red = parseInt(hex.slice(0, 2), 16);
+      const green = parseInt(hex.slice(2, 4), 16);
+      const blue = parseInt(hex.slice(4, 6), 16);
+      return red * 0.2126 + green * 0.7152 + blue * 0.0722 > 180;
+    }
+
+    // --- Fungsi Utama (Component Builder) ---
+    function createBorderGlow({
+      content = '',
+      className = '',
+      edgeSensitivity = 30,
+      glowColor = '40 80 80',
+      backgroundColor = '#120F17',
+      borderRadius = 28,
+      glowRadius = 40,
+      glowIntensity = 1.0,
+      coneSpread = 25,
+      animated = false,
+      colors = ['#c084fc', '#f472b6', '#38bdf8'],
+      fillOpacity = 0.5,
+    } = {}) {
+      const container = document.createElement('div');
+      container.className = `relative grid isolate border border-glow-card ${className}`;
+      
+      const lightSurface = isLightColor(backgroundColor);
+      container.style.background = backgroundColor;
+      container.style.borderColor = lightSurface ? 'rgb(24 24 27 / 12%)' : 'rgb(255 255 255 / 15%)';
+      container.style.borderRadius = `${borderRadius}px`;
+      container.style.transform = 'translate3d(0, 0, 0.01px)';
+
+      const borderDiv = document.createElement('div');
+      borderDiv.className = 'absolute inset-0 rounded-[inherit] -z-[1]';
+      borderDiv.style.border = '1px solid transparent';
+
+      const fillDiv = document.createElement('div');
+      fillDiv.className = 'absolute inset-0 rounded-[inherit] -z-[1]';
+      fillDiv.style.border = '1px solid transparent';
+
+      const glowSpanOuter = document.createElement('span');
+      glowSpanOuter.className = 'absolute pointer-events-none z-[1] rounded-[inherit]';
+      glowSpanOuter.style.inset = `${-glowRadius}px`;
+
+      const glowSpanInner = document.createElement('span');
+      glowSpanInner.className = 'absolute rounded-[inherit]';
+      glowSpanInner.style.inset = `${glowRadius}px`;
+      glowSpanInner.style.boxShadow = buildBoxShadow(glowColor, glowIntensity);
+      glowSpanOuter.appendChild(glowSpanInner);
+
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'flex flex-col relative overflow-auto z-[1] p-6';
+      if (typeof content === 'string') {
+        contentDiv.innerHTML = content;
+      } else if (content instanceof HTMLElement) {
+        contentDiv.appendChild(content);
+      }
+
+      container.appendChild(borderDiv);
+      container.appendChild(fillDiv);
+      container.appendChild(glowSpanOuter);
+      container.appendChild(contentDiv);
+
+      let isHovered = false;
+      let cursorAngle = 45;
+      let edgeProximity = 0;
+      let sweepActive = false;
+
+      function getCenterOfElement(el) {
+        const { width, height } = el.getBoundingClientRect();
+        return [width / 2, height / 2];
+      }
+
+      function getEdgeProximity(el, x, y) {
+        const [cx, cy] = getCenterOfElement(el);
+        const dx = x - cx;
+        const dy = y - cy;
+        let kx = Infinity, ky = Infinity;
+        if (dx !== 0) kx = cx / Math.abs(dx);
+        if (dy !== 0) ky = cy / Math.abs(dy);
+        return Math.min(Math.max(1 / Math.min(kx, ky), 0), 1);
+      }
+
+      function getCursorAngle(el, x, y) {
+        const [cx, cy] = getCenterOfElement(el);
+        const dx = x - cx;
+        const dy = y - cy;
+        if (dx === 0 && dy === 0) return 0;
+        let degrees = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+        if (degrees < 0) degrees += 360;
+        return degrees;
+      }
+
+      function updateStyles() {
+        const colorSensitivity = edgeSensitivity + 20;
+        const isVisible = isHovered || sweepActive;
+        const borderOpacity = isVisible ? Math.max(0, (edgeProximity * 100 - colorSensitivity) / (100 - colorSensitivity)) : 0;
+        const glowOpacity = isVisible ? Math.max(0, (edgeProximity * 100 - edgeSensitivity) / (100 - edgeSensitivity)) : 0;
+
+        const meshGradients = buildMeshGradients(colors);
+        const borderBg = meshGradients.map(g => `${g} border-box`);
+        const fillBg = meshGradients.map(g => `${g} padding-box`);
+        const angleDeg = `${cursorAngle.toFixed(3)}deg`;
+
+        borderDiv.style.background = [`linear-gradient(${backgroundColor} 0 100%) padding-box`, 'linear-gradient(rgb(255 255 255 / 0%) 0% 100%) border-box', ...borderBg].join(', ');
+        borderDiv.style.opacity = borderOpacity;
+        borderDiv.style.maskImage = `conic-gradient(from ${angleDeg} at center, black ${coneSpread}%, transparent ${coneSpread + 15}%, transparent ${100 - coneSpread - 15}%, black ${100 - coneSpread}%)`;
+        borderDiv.style.WebkitMaskImage = borderDiv.style.maskImage;
+        borderDiv.style.transition = isVisible ? 'opacity 0.25s ease-out' : 'opacity 0.75s ease-in-out';
+
+        fillDiv.style.background = fillBg.join(', ');
+        const maskStyles = [
+          'linear-gradient(to bottom, black, black)',
+          'radial-gradient(ellipse at 50% 50%, black 40%, transparent 65%)',
+          'radial-gradient(ellipse at 66% 66%, black 5%, transparent 40%)',
+          'radial-gradient(ellipse at 33% 33%, black 5%, transparent 40%)',
+          'radial-gradient(ellipse at 66% 33%, black 5%, transparent 40%)',
+          'radial-gradient(ellipse at 33% 66%, black 5%, transparent 40%)',
+          `conic-gradient(from ${angleDeg} at center, transparent 5%, black 15%, black 85%, transparent 95%)`,
+        ].join(', ');
+        fillDiv.style.maskImage = maskStyles;
+        fillDiv.style.WebkitMaskImage = maskStyles;
+        fillDiv.style.maskComposite = 'subtract, add, add, add, add, add';
+        fillDiv.style.WebkitMaskComposite = 'source-out, source-over, source-over, source-over, source-over, source-over';
+        fillDiv.style.opacity = borderOpacity * fillOpacity;
+        fillDiv.style.transition = isVisible ? 'opacity 0.25s ease-out' : 'opacity 0.75s ease-in-out';
+
+        const glowMask = `conic-gradient(from ${angleDeg} at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%)`;
+        glowSpanOuter.style.maskImage = glowMask;
+        glowSpanOuter.style.WebkitMaskImage = glowMask;
+        glowSpanOuter.style.opacity = glowOpacity;
+        glowSpanOuter.style.transition = isVisible ? 'opacity 0.25s ease-out' : 'opacity 0.75s ease-in-out';
+      }
+
+      container.addEventListener('pointermove', (e) => {
+        const rect = container.getBoundingClientRect();
+        edgeProximity = getEdgeProximity(container, e.clientX - rect.left, e.clientY - rect.top);
+        cursorAngle = getCursorAngle(container, e.clientX - rect.left, e.clientY - rect.top);
+        updateStyles();
+      });
+
+      container.addEventListener('pointerenter', () => { isHovered = true; updateStyles(); });
+      container.addEventListener('pointerleave', () => { isHovered = false; updateStyles(); });
+
+      if (animated) {
+        const angleStart = 110, angleEnd = 465;
+        sweepActive = true;
+        animateValue({ duration: 500, onUpdate: v => { edgeProximity = v / 100; updateStyles(); } });
+        animateValue({ ease: easeInCubic, duration: 1500, end: 50, onUpdate: v => { cursorAngle = (angleEnd - angleStart) * (v / 100) + angleStart; updateStyles(); }});
+        animateValue({ ease: easeOutCubic, delay: 1500, duration: 2250, start: 50, end: 100, onUpdate: v => { cursorAngle = (angleEnd - angleStart) * (v / 100) + angleStart; updateStyles(); }});
+        animateValue({ ease: easeInCubic, delay: 2500, duration: 1500, start: 100, end: 0, onUpdate: v => { edgeProximity = v / 100; updateStyles(); }, onEnd: () => { sweepActive = false; updateStyles(); } });
+      }
+
+      updateStyles();
+      return container;
+    }
+
+    // --- Menerapkan 3 Isi Berbeda dengan 1 Fungsi ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('card-container');
+
+      // 1. Data untuk Kartu Pertama
+
+
+      // 2. Data untuk Kartu Kedua (Isi dan warna berbeda)
+      const card1 = createBorderGlow({
+        content: `
+<div id="card-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl w-full"></div>
+<article class="flex flex-col rounded-2xl bg-surface-card border border-border-warm overflow-hidden shadow-sm hover:shadow-md hover:border-text-muted/40 transition-all group">
+<div class="relative w-full aspect-video bg-surface overflow-hidden border-b border-border-warm">
+<img alt="Developer Portfolio mockup" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="/Image/Portofolio.png"/>
+<span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded text-[10px] font-mono bg-btn-dark text-white">
+              Personal Web
+            </span>
+</div>
+<div class="p-4 flex flex-col flex-1 justify-between gap-3">
+<div>
+<h3 class="font-bold text-sm text-text-primary group-hover:text-btn-warm transition-colors">
+                Developer Portfolio +ANTI AI
+              </h3>
+<p class="text-xs text-text-secondary mt-1.5 leading-relaxed line-clamp-3">
+                Website portofolio interaktif yang dibangun secara <strong>mandiri</strong> untuk merepresentasikan profil keahlian, riwayat belajar kejuruan PPLG, serta kesiapan menyongsong PKL industri.
+              </p>
+</div>
+<div class="space-y-3 pt-2">
+<div class="flex flex-wrap gap-1 text-[10px] font-mono">
+<span class="px-2 py-0.5 rounded bg-surface border border-border-warm text-text-secondary">HTML5</span>
+<span class="px-2 py-0.5 rounded bg-surface border border-border-warm text-text-secondary">CSS3</span>
+<span class="px-2 py-0.5 rounded bg-surface border border-border-warm text-text-secondary">JavaScript</span>
+</div>
+<div class="flex items-center gap-2">
+<a class="flex-1 py-1.5 px-3 rounded-full bg-btn-dark hover:bg-btn-dark-hover text-white text-xs font-medium text-center flex items-center justify-center gap-1 transition-colors" href="https://noondeh.github.io/ProLi-ProfesionalLink/">
+<span class="material-symbols-outlined text-xs">visibility</span> Live Demo
+                </a>
+<a class="p-1.5 rounded-full border border-border-warm text-text-secondary hover:text-text-primary hover:bg-surface transition-colors" href="https://github.com/NoonDeh/ProLi-ProfesionalLink.git" title="View Source">
+<span class="material-symbols-outlined text-sm">terminal</span>
+</a>
+</div>
+</div>
+</div>
+</article>
+        `,
+        colors: ['#38bdf8', '#34d399', '#6ee7b7'],
+        animated: false
+      });
+
+      // 3. Data untuk Kartu Ketiga (Isi dan warna berbeda)
+      const card2 = createBorderGlow({
+        content: `
+<article class="flex flex-col rounded-2xl bg-surface-card border border-border-warm overflow-hidden shadow-sm hover:shadow-md hover:border-text-muted/40 transition-all group">
+<div class="relative w-full aspect-video bg-surface overflow-hidden border-b border-border-warm">
+<img alt="Task Tracker &amp; Java Core mockup" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="/image/Sistem Pembayaran Parkir.png"/>
+<span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded text-[10px] font-mono bg-btn-dark text-white">
+              Mobile &amp; Logic
+            </span>
+</div>
+<div class="p-4 flex flex-col flex-1 justify-between gap-3">
+<div>
+<h3 class="font-bold text-sm text-text-primary group-hover:text-btn-warm transition-colors">
+                Aplikasi Parkir Kendaraan
+              </h3>
+<p class="text-xs text-text-secondary mt-1.5 leading-relaxed line-clamp-3">
+                Aplikasi pembayaran parkir menggunakan fondasi Java, diintegrasikan dengan modul dasar antarmuka Android Studio.
+              </p>
+</div>
+<div class="space-y-3 pt-2">
+<div class="flex flex-wrap gap-1 text-[10px] font-mono">
+<span class="px-2 py-0.5 rounded bg-surface border border-border-warm text-text-secondary">Java</span>
+<span class="px-2 py-0.5 rounded bg-surface border border-border-warm text-text-secondary">Android Studio</span>
+<span class="px-2 py-0.5 rounded bg-surface border border-border-warm text-text-secondary">Git</span>
+</div>
+<div class="flex items-center gap-2">
+<a class="flex-1 py-1.5 px-3 rounded-full bg-surface border border-border-warm hover:bg-surface-subtle text-text-primary text-xs font-medium text-center flex items-center justify-center gap-1 transition-colors" href="https://github.com/NoonDeh/Aplikasi-Parkir-Kendaraan_APK.git">
+<span class="material-symbols-outlined text-xs">code</span> GitHub Repo
+                </a>
+</div>
+</div>
+</div>
+</article>
+</div>
+</section>
+        `,
+        colors: ['#fbbf24', '#f87171', '#fb923c'],
+        animated: false
+      });
+
+      // Masukkan ketiganya ke dalam container HTML
+      container.appendChild(card1);
+      container.appendChild(card2);
+      container.appendChild(card3);
+    });
+
+</script>
+</body></html>
